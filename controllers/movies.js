@@ -1,6 +1,6 @@
 const Movie = require('../models/movie');
-// const NotFoundError = require('../errors/not-found-err');
-// const ForbiddenError = require('../errors/forbidden-err');
+const NotFoundError = require('../errors/not-found-err');
+const ForbiddenError = require('../errors/forbidden-err');
 
 module.exports.createMovie = (req, res, next) => {
   const {
@@ -46,10 +46,10 @@ module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.id)
     .then((movie) => {
       if (movie === null) {
-        // throw new NotFoundError('Фильм не найден!');
+        throw new NotFoundError('Фильм не найден!');
       }
       if (movie.owner.toString() !== req.user._id) {
-        // throw new ForbiddenError('Нельзя удалить чужой фильм!');
+        throw new ForbiddenError('Нельзя удалить чужой фильм!');
       }
       return movie.remove();
     })

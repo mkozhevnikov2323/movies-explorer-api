@@ -6,7 +6,7 @@ const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
-// const NotFoundError = require('./errors/not-found-err');
+const NotFoundError = require('./errors/not-found-err');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -27,9 +27,9 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
 
-// app.patch('/*', () => {
-//   throw new NotFoundError('Страница не найдена!');
-// });
+app.patch('/*', () => {
+  throw new NotFoundError('Страница не найдена!');
+});
 
 app.use(errorLogger);
 app.use(errors());
