@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 // const cors = require('./middlewares/cors');
 // const NotFoundError = require('./errors/not-found-err');
 
@@ -17,7 +17,7 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(requestLogger);
+app.use(requestLogger);
 // app.use(cors);
 
 app.use('signup', require('./routes/signup'));
@@ -31,8 +31,7 @@ app.use('/movies', require('./routes/movies'));
 //   throw new NotFoundError('Страница не найдена!');
 // });
 
-// app.use(errorLogger);
-
+app.use(errorLogger);
 app.use(errors());
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
