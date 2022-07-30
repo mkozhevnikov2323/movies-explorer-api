@@ -1,0 +1,21 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Api for app about saving favourite movies",
+  "main": "app.js",
+  "scripts": {
+    "lint": "npx eslint .",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkozhevnikov2323/movies-explorer-api.git"
+  },
+  "author": "Maksim Kozhevnikov mkozhevnikov23@yandex.ru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkozhevnikov2323/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/mkozhevnikov2323/movies-explorer-api#readme"
+}
