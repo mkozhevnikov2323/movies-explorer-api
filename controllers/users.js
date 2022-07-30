@@ -1,32 +1,31 @@
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 // const NotFoundError = require('../errors/not-found-err');
 
-// module.exports.createUser = (req, res, next) => {
-//   bcrypt.hash(req.body.password, 10)
-//     .then((hash) => User.create({ ...req.body, password: hash }))
-//     .then((user) => res.status(201).send({
-//       name: user.name,
-//       about: user.about,
-//       avatar: user.avatar,
-//       email: user.email,
-//       _id: user._id,
-//     }))
-//     .catch(next);
-// };
+module.exports.createUser = (req, res, next) => {
+  bcrypt.hash(req.body.password, 10)
+    .then((hash) => User.create({ ...req.body, password: hash }))
+    .then((user) => res.status(201).send({
+      name: user.name,
+      email: user.email,
+      _id: user._id,
+    }))
+    .catch(next);
+};
 
-// module.exports.login = (req, res, next) => {
-//   const { email, password } = req.body;
+module.exports.login = (req, res, next) => {
+  const { email, password } = req.body;
 
-//   return User.findUserByCredentials(email, password)
-//     .then((user) => {
-//       const { NODE_ENV, JWT_SECRET } = process.env;
-//       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key', { expiresIn: '7d' });
-//       res.send({ token });
-//     })
-//     .catch(next);
-// };
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const { NODE_ENV, JWT_SECRET } = process.env;
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'super-secret-key', { expiresIn: '7d' });
+      res.send({ token });
+    })
+    .catch(next);
+};
 
 module.exports.getUserInfo = (req, res, next) => {
   User.findOne({ _id: req.user._id })
