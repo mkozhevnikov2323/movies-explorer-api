@@ -1,6 +1,6 @@
 const allowedCors = [
-  // 'https://mkozhevnikov23-m.students.nomoredomains.xyz',
-  // 'http://mkozhevnikov23-m.students.nomoredomains.xyz',
+  'https://movies.m23.nomoredomains.xyz',
+  'http://movies.m23.nomoredomains.xyz',
   'http://localhost:3000',
 ];
 
