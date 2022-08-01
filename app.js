@@ -9,10 +9,12 @@ const cors = require('./middlewares/cors');
 const NotFoundError = require('./errors/not-found-err');
 const globalErrorHandler = require('./errors/global-error-handler');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, NODE_ENV, DATA_BASE } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(NODE_ENV === 'production'
+  ? DATA_BASE
+  : 'mongodb://localhost:27017/bitfilmsdb', {
   useNewUrlParser: true,
 });
 
