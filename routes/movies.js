@@ -16,8 +16,8 @@ router.post('/', celebrate({
     thumbnail: Joi.string().required().pattern(/https?:\/\/(w{3}\.)?[\w\-.~:/?#[\]@!$&'()*+,;=]{2,}/mi),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    owner: Joi.string().required(),
-    movieId: Joi.string().required(),
+    movieId: Joi.number().required(),
+    owner: Joi.required(),
   }),
 }), createMovie);
 

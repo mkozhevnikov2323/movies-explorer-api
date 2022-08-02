@@ -13,7 +13,7 @@ module.exports.createMovie = (req, res, next) => {
     trailerLink,
     thumbnail,
     owner = req.user._id,
-    movieId = req.movie._id,
+    movieId,
     nameRU,
     nameEN,
   } = req.body;
