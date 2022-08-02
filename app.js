@@ -23,12 +23,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(cors);
 
-app.use('/signup', require('./routes/signup'));
-app.use('/signin', require('./routes/signin'));
+app.use(require('./routes/signup'));
+app.use(require('./routes/signin'));
 
 app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
+app.use(require('./routes/users'));
+app.use(require('./routes/movies'));
 
 app.patch('/*', () => {
   throw new NotFoundError('Страница не найдена!');
