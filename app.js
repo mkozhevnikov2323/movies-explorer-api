@@ -30,7 +30,7 @@ app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/movies'));
 
-app.patch('/*', () => {
+app.all('/*', () => {
   throw new NotFoundError('Страница не найдена!');
 });
 
