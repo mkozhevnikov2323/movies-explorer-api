@@ -26,6 +26,12 @@ app.use(cors);
 app.use(require('./routes/signup'));
 app.use(require('./routes/signin'));
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(auth);
 app.use(require('./routes/users'));
 app.use(require('./routes/movies'));
