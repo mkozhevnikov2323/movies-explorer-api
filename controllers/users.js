@@ -11,7 +11,19 @@ module.exports.createUser = (req, res, next) => {
       email: user.email,
       _id: user._id,
     }))
-    .catch(next);
+    .catch((err) => {
+      if (err.code === 11000) {
+        res.status(409).send({ message: 'Пользователь с данным E-mail присутствует в базе.' });
+      }
+      if (err.name === 'ValidationError') {
+        res.status(400).send({ message: 'Некорректные данные.' });
+      }
+      if (err.name === 'CastError') {
+        res.status(400).send({ message: 'Некорректный id.' });
+      }
+
+      next(err);
+    });
 };
 
 module.exports.login = (req, res, next) => {
@@ -40,5 +52,17 @@ module.exports.updateUserInfo = (req, res, next) => {
     runValidators: true,
   })
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.code === 11000) {
+        res.status(409).send({ message: 'Пользователь с данным E-mail присутствует в базе.' });
+      }
+      if (err.name === 'ValidationError') {
+        res.status(400).send({ message: 'Некорректные данные.' });
+      }
+      if (err.name === 'CastError') {
+        res.status(400).send({ message: 'Некорректный id.' });
+      }
+
+      next(err);
+    });
 };
