@@ -12,7 +12,7 @@ const app = express();
 
 mongoose.connect(NODE_ENV === 'production'
   ? DATA_BASE
-  : 'mongodb://localhost:27017/bitfilmsdb', {
+  : 'mongodb://localhost:27017/moviesdb', {
   useNewUrlParser: true,
 });
 
