@@ -33,7 +33,16 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
   })
     .then((movie) => res.status(201).send(movie))
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        res.status(400).send({ message: 'Некорректные данные.' });
+      }
+      if (err.name === 'CastError') {
+        res.status(400).send({ message: 'Некорректный id.' });
+      }
+
+      next(err);
+    });
 };
 
 module.exports.getMovies = (req, res, next) => {
